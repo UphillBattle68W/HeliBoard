@@ -666,6 +666,17 @@ public class LatinIME extends InputMethodService implements
     }
 
     @Override
+    public void onConfigureWindow(android.view.Window win, boolean isFullscreen, boolean isCandidatesOnly) {
+        super.onConfigureWindow(win, isFullscreen, isCandidatesOnly);
+        win.setDecorFitsSystemWindows(false);
+        win.setNavigationBarColor(android.graphics.Color.TRANSPARENT);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            win.setNavigationBarContrastEnforced(false);
+        }
+    }
+    
+    
+    @Override
     public View onCreateInputView() {
         StatsUtils.onCreateInputView();
         return mKeyboardSwitcher.onCreateInputView(KtxKt.getDisplayContext(this), mIsHardwareAcceleratedDrawingEnabled);
