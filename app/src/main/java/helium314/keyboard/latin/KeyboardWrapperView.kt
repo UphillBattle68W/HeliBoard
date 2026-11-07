@@ -163,4 +163,15 @@ class KeyboardWrapperView @JvmOverloads constructor(
         switchOneHandedModeBtn.setLayout((keyboardView.measuredHeight * 0.5f).toInt())
         resizeOneHandedModeBtn.setLayout((keyboardView.measuredHeight * 0.8f).toInt())
     }
+
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        if (w > 0 && h > 0) {
+            val blurDrawable = helium314.keyboard.latin.utils.WallpaperBlurHelper.getBlurredWallpaperDrawable(context, w, h)
+            if (blurDrawable != null) {
+                background = blurDrawable
+            }
+        }
+    }
+    
 }
